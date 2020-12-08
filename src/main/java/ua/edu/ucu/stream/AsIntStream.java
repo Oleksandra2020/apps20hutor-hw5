@@ -36,7 +36,7 @@ public class AsIntStream implements IntStream {
 
     public void checkIfEmpty() throws IllegalArgumentException
     {
-        if (! stream.hasNext())
+        if (!stream.hasNext())
         {
             throw new IllegalArgumentException();
         }
@@ -101,7 +101,7 @@ public class AsIntStream implements IntStream {
     public Integer sum() {
         checkIfEmpty();
         int sum = 0;
-        for (Iterator<Integer> it = stream; it.hasNext(); ) {
+        for (Iterator<Integer> it = stream; it.hasNext();) {
             int element = it.next();
             sum += element;
         }
@@ -134,19 +134,20 @@ public class AsIntStream implements IntStream {
 
     @Override
     public int reduce(int identity, IntBinaryOperator op) {
+        int tempIdentity = identity;
         while (stream.hasNext())
         {
             int element = stream.next();
-            identity = op.apply(identity, element);
+            tempIdentity = op.apply(tempIdentity, element);
         }
-        return identity;
+        return tempIdentity;
     }
 
     @Override
     public int[] toArray() {
         checkIfEmpty();
         ArrayList<Integer> arrayList = new ArrayList<>();
-        while(stream.hasNext())
+        while (stream.hasNext())
         {
             arrayList.add(stream.next());
         }

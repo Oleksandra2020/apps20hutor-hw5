@@ -12,7 +12,8 @@ public class FlatMapIterator implements Iterator<Integer> {
     private IntToIntStreamFunction func;
     private StreamIterator subIterator = null;
 
-    public FlatMapIterator(Iterator<Integer> stream, IntToIntStreamFunction func)
+    public FlatMapIterator(Iterator<Integer> stream,
+                           IntToIntStreamFunction func)
     {
         this.stream = stream;
         this.func = func;
@@ -29,7 +30,8 @@ public class FlatMapIterator implements Iterator<Integer> {
         {
             return false;
         }
-        AsIntStream newStream = (AsIntStream) func.applyAsIntStream(stream.next());
+        AsIntStream newStream = (AsIntStream)
+                func.applyAsIntStream(stream.next());
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int value: newStream.toArray())
         {
